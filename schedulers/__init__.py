@@ -1,6 +1,6 @@
 from .unrestricted import UnrestrictedScheduler
 from .strict_isolation import StrictIsolationScheduler
-from .security_only import SecurityOnlyScheduler
+from .slo_first import SlOFirstScheduler
 from .securegpu import SecureGPUScheduler
 
 
@@ -8,7 +8,7 @@ def get_scheduler(name: str):
     schedulers = {
         "unrestricted": UnrestrictedScheduler,
         "strict_isolation": StrictIsolationScheduler,
-        "security_only": SecurityOnlyScheduler,
+        "slo_first": SlOFirstScheduler,
         "securegpu": SecureGPUScheduler,
     }
 

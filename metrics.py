@@ -65,8 +65,14 @@ def calculate_metrics(
         "slo_satisfaction": (
             len(slo_met) / len(completed)
         ),
+        "slo_violation_rate": (
+            1.0 - len(slo_met) / len(completed)
+        ),
         "unsafe_colocation_rate": (
             len(unsafe_jobs) / len(completed)
+        ),
+        "security_policy_compliance": (
+            1.0 - len(unsafe_jobs) / len(completed)
         ),
         "avg_queue_delay": float(
             np.mean(queue_delays)

@@ -27,7 +27,7 @@ schedulers/
     base.py
     unrestricted.py
     strict_isolation.py
-    security_only.py
+    slo_first.py
     securegpu.py
     __init__.py
 

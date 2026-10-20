@@ -13,7 +13,7 @@ def main():
     scheduler_names = [
         "unrestricted",
         "strict_isolation",
-        "security_only",
+        "slo_first",
         "securegpu",
     ]
 

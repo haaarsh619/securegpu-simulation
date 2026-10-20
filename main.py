@@ -15,7 +15,7 @@ from plot_results import create_all_plots
 SCHEDULER_NAMES = [
     "unrestricted",
     "strict_isolation",
-    "security_only",
+    "slo_first",
     "securegpu",
 ]
 

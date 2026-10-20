@@ -34,27 +34,30 @@ def generate_workloads(
 
         workload_type = random.choice(
             [
-                "image",
-                "transformer",
-                "training",
+                "inference",
+                "fine_tuning",
+                "training"
             ]
         )
 
-        if workload_type == "image":
-            memory_gb = random.randint(2, 4)
-            service_ex = random.uniform(5, 15)
+        if workload_type == "inference":
+            memory_gb = random.randint(4, 10)
+            service_ex = random.uniform(2, 15)
+
             service_iso = service_ex * random.uniform(1.03, 1.12)
             service_sh = service_ex * random.uniform(1.10, 1.30)
 
-        elif workload_type == "transformer":
-            memory_gb = random.randint(6, 10)
-            service_ex = random.uniform(10, 30)
+        elif workload_type == "fine_tuning":
+            memory_gb = random.randint(10, 24)
+            service_ex = random.uniform(15, 45)
+
             service_iso = service_ex * random.uniform(1.05, 1.18)
             service_sh = service_ex * random.uniform(1.20, 1.45)
 
-        else:
-            memory_gb = random.randint(8, 12)
-            service_ex = random.uniform(25, 60)
+        else:  # training
+            memory_gb = random.randint(20, 38)
+            service_ex = random.uniform(30, 90)
+
             service_iso = service_ex * random.uniform(1.04, 1.15)
             service_sh = service_ex * random.uniform(1.10, 1.30)
 
