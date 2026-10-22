@@ -46,9 +46,27 @@ python main.py
 OUTPUTS
 -------
 securegpu_results.csv
-slo_satisfaction.png
-unsafe_colocation.png
-gpu_utilization.png
+
+figures/
+    summary_<N>gpus.png              SLO, admission, memory util, compliance (2x2)
+    slo_satisfaction_<N>gpus.png     per-metric curves vs. arrival rate,
+    admission_rate_<N>gpus.png       mean of seeds with 95% CI band
+    memory_utilization_<N>gpus.png
+    gpu_busy_time_<N>gpus.png
+    queue_delay_<N>gpus.png
+    tradeoff_slo_vs_compliance.png   security vs. performance per scheduler
+    mode_mix.png                     share of SH / ISO / EX placements
+    unsafe_colocation.png            unsafe co-location by GPU count
+    gpu_scaling.png                  SLO satisfaction vs. number of GPUs
+    slo_by_workload_type.png         inference / fine-tuning / training
+    queue_delay_by_workload_type.png
+    algorithm1_risk_modes.png        pairwise risk -> required mode
+    gantt_timeline.png               placements on each GPU for one run
+
+METRICS
+-------
+admission_rate = share of jobs placed on a GPU before their deadline.
+security_policy_compliance = 1 - unsafe_colocation_rate.
 
 IMPORTANT
 ---------

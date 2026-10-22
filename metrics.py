@@ -41,6 +41,40 @@ def calculate_metrics(
         for mode in ["SH", "ISO", "EX"]
     }
 
+    # Admission = the job was placed on a GPU before its SLO
+    # deadline passed (start_time <= deadline).
+    admitted = [
+        w for w in completed
+        if w.start_time is not None
+        and w.start_time <= w.deadline
+    ]
+
+    per_type = {}
+
+    for workload_type in [
+        "inference",
+        "fine_tuning",
+        "training",
+    ]:
+        jobs_of_type = [
+            w for w in completed
+            if w.workload_type == workload_type
+        ]
+
+        if not jobs_of_type:
+            per_type[f"slo_{workload_type}"] = np.nan
+            per_type[f"queue_delay_{workload_type}"] = np.nan
+            continue
+
+        per_type[f"slo_{workload_type}"] = (
+            sum(1 for w in jobs_of_type if w.met_slo())
+            / len(jobs_of_type)
+        )
+
+        per_type[f"queue_delay_{workload_type}"] = float(
+            np.mean([w.queue_delay() for w in jobs_of_type])
+        )
+
     memory_utilization = (
         memory_area
         /
@@ -68,6 +102,9 @@ def calculate_metrics(
         "slo_violation_rate": (
             1.0 - len(slo_met) / len(completed)
         ),
+        "admission_rate": (
+            len(admitted) / len(completed)
+        ),
         "unsafe_colocation_rate": (
             len(unsafe_jobs) / len(completed)
         ),
@@ -89,4 +126,5 @@ def calculate_metrics(
         "SH": mode_counts["SH"],
         "ISO": mode_counts["ISO"],
         "EX": mode_counts["EX"],
+        **per_type,
     }

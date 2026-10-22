@@ -10,6 +10,7 @@ def simulate(
     scheduler,
     workloads,
     gpu_count=4,
+    return_jobs=False,
 ):
     jobs = copy.deepcopy(
         workloads
@@ -223,5 +224,8 @@ def simulate(
     )
 
     result["scheduler"] = scheduler.name
+
+    if return_jobs:
+        return result, completed
 
     return result

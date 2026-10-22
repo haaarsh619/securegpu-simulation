@@ -17,5 +17,7 @@ STRENGTH_MODE = {1: "SH", 2: "ISO", 3: "EX"}
 
 DEFAULT_NUM_JOBS = 250
 DEFAULT_GPU_COUNTS = [3, 6, 9]
-DEFAULT_ARRIVAL_RATES = [0.1, 0.3, 0.5, 0.7, 1.0]
+# Finer steps at low load: above ~0.4 jobs/sec every GPU count
+# is saturated and the curves flatten out.
+DEFAULT_ARRIVAL_RATES = [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4]
 DEFAULT_SEEDS = list(range(1, 11))

@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 from config import (
@@ -9,7 +11,7 @@ from config import (
 from generator import generate_workloads
 from schedulers import get_scheduler
 from simulator import simulate
-from plot_results import create_all_plots
+from plot_results import create_all_plots, FIGURE_DIR
 
 
 SCHEDULER_NAMES = [
@@ -83,6 +85,7 @@ def run_experiments():
 def print_summary(df):
     summary_columns = [
         "slo_satisfaction",
+        "admission_rate",
         "unsafe_colocation_rate",
         "avg_queue_delay",
         "avg_completion_time",
@@ -120,21 +123,12 @@ if __name__ == "__main__":
     )
 
     print(
-        "\nCreated:"
+        "\nCreated securegpu_results.csv and figures/:"
     )
 
-    print(
-        "securegpu_results.csv"
-    )
-
-    print(
-        "slo_satisfaction.png"
-    )
-
-    print(
-        "unsafe_colocation.png"
-    )
-
-    print(
-        "gpu_utilization.png"
-    )
+    for filename in sorted(
+        os.listdir(FIGURE_DIR)
+    ):
+        print(
+            f"  {filename}"
+        )
